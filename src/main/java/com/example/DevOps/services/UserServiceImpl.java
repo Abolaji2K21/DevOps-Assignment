@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService{
         RegisterUserRespond response = new RegisterUserRespond();
         BeanUtils.copyProperties(savedUser, response);
         response.setMessage("User registered successfully.");
-
+        response.setLoggedIn(false);
         return response;
     }
 
