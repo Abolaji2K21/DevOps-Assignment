@@ -2,7 +2,9 @@ package com.example.DevOps.services;
 
 import com.example.DevOps.data.models.User;
 import com.example.DevOps.data.repositories.UserRepository;
+import com.example.DevOps.dtos.requests.LoginUserRequest;
 import com.example.DevOps.dtos.requests.RegisterUserRequest;
+import com.example.DevOps.dtos.responses.LoginUserResponse;
 import com.example.DevOps.dtos.responses.RegisterUserRespond;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,18 @@ public class UserServiceImpl implements UserService{
         BeanUtils.copyProperties(savedUser, response);
         response.setMessage("User registered successfully.");
 
+        return response;
+    }
+
+    @Override
+    public LoginUserResponse login(LoginUserRequest loginUserRequest) {
+        User user = findUserBy(loginUserRequest.getEmail());
+        if (!user.getPassword().equals(loginUserRequest.getPassword())) {
+            throw new RuntimeException("Invalid credentials.");
+        }
+        LoginUserResponse response = new LoginUserResponse();
+        BeanUtils.copyProperties(user, response);
+        response.setMessage("Logged in successfully.");
         return response;
     }
 
