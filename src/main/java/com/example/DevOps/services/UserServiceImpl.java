@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService{
         LoginUserResponse response = new LoginUserResponse();
         BeanUtils.copyProperties(user, response);
         response.setMessage("Logged in successfully.");
+        response.setLoggedIn(true);
         return response;
     }
 
