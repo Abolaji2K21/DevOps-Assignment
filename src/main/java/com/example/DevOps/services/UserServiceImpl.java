@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService{
         RegisterUserRespond response = new RegisterUserRespond();
         BeanUtils.copyProperties(savedUser, response);
         response.setMessage("User registered successfully.");
-
+        response.setLoggedIn(false);
         return response;
     }
 
@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService{
         LoginUserResponse response = new LoginUserResponse();
         BeanUtils.copyProperties(user, response);
         response.setMessage("Logged in successfully.");
+        response.setLoggedIn(true);
         return response;
     }
 
